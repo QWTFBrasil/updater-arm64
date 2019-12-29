@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-# update qwprogs from latest github release
+# sync down qwprogs
 aws s3 sync s3://fortressone-dats /updater/dats/
 
-# update maps/progs/sounds/lits etc from amazon s3
+# sync down assets
 aws s3 sync s3://map-repo /updater/map-repo/
+
+# sync up demos
+aws s3 sync /updater/demos/ s3://fortressone-demos/${FO_REGION}/
