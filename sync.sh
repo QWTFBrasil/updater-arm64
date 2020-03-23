@@ -6,7 +6,7 @@
 # sync down assets
 /usr/local/bin/aws s3 sync --no-sign-request s3://map-repo /updater/map-repo/
 
-if [ ! -z "${AWS_SECRET_ACCESS_KEY}" ] && [ ! -z "${AWS_ACCESS_KEY_ID}" ]
+if [ ! -z "${AWS_SECRET_ACCESS_KEY}" ] && [ ! -z "${AWS_ACCESS_KEY_ID}" ]; then
   # sync up demos
   if [ ! -z "${S3_DEMO_URI}" ]; then
     /usr/local/bin/aws s3 sync /updater/demos/ "${S3_DEMO_URI}"
