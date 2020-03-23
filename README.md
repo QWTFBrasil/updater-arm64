@@ -26,3 +26,12 @@ Deploy updater:
 docker tag updater fortressone/updater:latest
 docker push fortressone/updater:latest
 ```
+
+Environment variables:
+
+```
+AWS_SECRET_ACCESS_KEY
+AWS_ACCESS_KEY_ID
+S3_DEMO_URI
+S3_STATS_URI
+```
