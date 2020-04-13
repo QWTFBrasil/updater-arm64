@@ -9,7 +9,8 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/* \
  && curl -O https://bootstrap.pypa.io/get-pip.py \
  && python3 get-pip.py \
- && pip3 install awscli --upgrade
+ && pip3 install awscli --upgrade \
+ && aws configure set default.s3.max_concurrent_requests 1
 COPY file_placeholders/ /updater/
 COPY entrypoint.sh /updater
 COPY sync.sh /updater
