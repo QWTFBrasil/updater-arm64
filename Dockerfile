@@ -11,7 +11,7 @@ RUN apt-get update \
  && python3 get-pip.py \
  && pip3 install awscli --upgrade \
  && aws configure set default.s3.max_concurrent_requests 1 \
- && aws configure set default.s3.max_bandwidth 524880
+ && aws configure set default.s3.max_bandwidth 5MB/s
 COPY file_placeholders/ /updater/
 COPY entrypoint.sh /updater
 COPY sync.sh /updater
