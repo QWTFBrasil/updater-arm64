@@ -35,3 +35,10 @@ AWS_ACCESS_KEY_ID
 S3_DEMO_URI
 S3_STATS_URI
 ```
+
+
+Scratch:
+
+```
+no_players=$(qstat -qws sydney.fortressone.org | awk 'NR>1 {print $2;}')
+[[ $no_players =~ ^0/ ]] && echo match
