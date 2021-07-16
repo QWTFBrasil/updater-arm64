@@ -4,7 +4,7 @@
 /usr/local/bin/aws s3 sync --no-sign-request s3://fortressone-dats /updater/dats/
 
 # sync down assets
-/usr/local/bin/aws s3 sync --size-only --no-sign-request s3://fortressone-gz /updater/map-repo/fortress/maps/
+/usr/local/bin/aws s3 sync --size-only --no-sign-request s3://fortressone-package /updater/map-repo/fortress/maps/
 
 if [ ! -z "${AWS_SECRET_ACCESS_KEY}" ] && [ ! -z "${AWS_ACCESS_KEY_ID}" ]; then
   # sync up demos and delete demos older than a week
