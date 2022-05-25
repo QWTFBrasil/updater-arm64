@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# no_players=$(qstat -qws sydney.fortressone.org | awk 'NR>1 {print $2;}')
+# [[ $no_players =~ ^0/ ]] && echo match
+
 # sync down qwprogs
 /usr/local/bin/aws s3 sync --no-sign-request s3://fortressone-dats /updater/dats/
 
