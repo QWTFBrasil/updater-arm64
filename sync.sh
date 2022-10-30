@@ -4,7 +4,7 @@
 # [[ $no_players =~ ^0/ ]] && echo match
 
 # sync down qwprogs
-/usr/local/bin/aws s3 sync --no-sign-request s3://fortressone-dats /updater/dats/
+/usr/local/bin/aws s3 sync --no-sign-request --exact-timestamps s3://fortressone-dats /updater/dats/
 
 # sync down assets
 /usr/local/bin/aws s3 sync --size-only --no-sign-request s3://fortressone-package /updater/map-repo/fortress/maps/
