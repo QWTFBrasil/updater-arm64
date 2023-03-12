@@ -4,10 +4,22 @@
 # [[ $no_players =~ ^0/ ]] && echo match
 
 # sync down qwprogs
-/usr/local/bin/aws s3 sync --no-sign-request --exact-timestamps s3://fortressone-dats /updater/dats/
+/usr/local/bin/aws s3 sync \
+  --no-sign-request \
+  --exact-timestamps \
+  --cli-read-timeout 600 \
+  --cli-connect-timeout 600 \
+  s3://fortressone-dats \
+  /updater/dats/
 
 # sync down assets
-/usr/local/bin/aws s3 sync --size-only --no-sign-request s3://fortressone-package /updater/map-repo/fortress/maps/
+/usr/local/bin/aws s3 sync \
+  --size-only \
+  --no-sign-request \
+  --cli-read-timeout 600 \
+  --cli-connect-timeout 600 \
+  s3://fortressone-package \
+  /updater/map-repo/fortress/maps/
 
 if [ ! -z "${AWS_SECRET_ACCESS_KEY}" ] && [ ! -z "${AWS_ACCESS_KEY_ID}" ]; then
   # sync up demos and delete demos older than a week
