@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
 
 printenv | grep -v "no_proxy" >> /etc/environment
+
+# Run sync on init
 source sync.sh
-aws configure set default.s3.max_concurrent_requests 1
-aws configure set default.s3.max_bandwidth 10KB/s
-cron -f
+
+# Run when fosv makes upload_ready file
+inotifywait -m /updater/stats/ --recursive --event create --format '%w%f' |
+  while read -r file; do
+    if [[ $(basename "${file}") == "upload_ready" ]]; then
+      rm "${file}"
+      echo "Deleted upload_ready file: ${file}"
+      source sync.sh
+    fi
+  done
