@@ -3,8 +3,12 @@
 if [ ! -z "${AWS_SECRET_ACCESS_KEY}" ] && [ ! -z "${AWS_ACCESS_KEY_ID}" ]; then
   # sync up stats and delete stats older than a week
   if [ ! -z "${S3_STATS_URI}" ]; then
-    /usr/local/bin/aws s3 sync /updater/stats/ "${S3_STATS_URI}" \
-      && find /updater/stats/ -name "*.json" -type f -mtime +6 -delete
+    if /usr/local/bin/aws s3 sync /updater/stats/ "${S3_STATS_URI}"; then
+      {
+        find /updater/stats/ -name "*.json" -type f -mtime +6 -delete
+        curl http://haze.fortressone.org/notify/
+      }
+    fi
   fi
 
   # sync up demos and delete demos older than a week
