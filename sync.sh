@@ -27,8 +27,9 @@ if [ -n "${AWS_SECRET_ACCESS_KEY}" ] && [ -n "${AWS_ACCESS_KEY_ID}" ] && [ -n "$
           subdir_name=$(basename "$subdir")
 
           if /usr/local/bin/aws s3 cp "$file" "$S3_STATS_URI/$FO_REGION/$subdir_name/$filename"; then
-            echo "$S3_STATS_URI/$FO_REGION/$subdir_name/$filename synced"
+            rm $file
 
+            # Notify haze stats
             if [ -n "${FO_STATS_FILES_ADDRESS}" ]; then
               curl "$FO_STATS_FILES_ADDRESS/notify/$FO_REGION/$subdir_name/$(url_encode "$filename")"
               echo "$FO_STATS_FILES_ADDRESS/notify/$FO_REGION/$subdir_name/$(url_encode "$filename")" notification sent
@@ -39,7 +40,6 @@ if [ -n "${AWS_SECRET_ACCESS_KEY}" ] && [ -n "${AWS_ACCESS_KEY_ID}" ] && [ -n "$
         done
       fi
     done
-    find /updater/stats/ -name "*.json" -type f -mtime +6 -delete 2>/dev/null
   fi
 
   if [ -n "${S3_DEMO_URI}" ]; then
